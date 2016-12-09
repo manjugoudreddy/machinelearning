@@ -11865,14 +11865,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Calculate number of students</span>
 <span class="n">n_students</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Calculate number of features</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> 
 
 <span class="c1"># Calculate passing students</span>
 <span class="n">n_passed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">])[</span><span class="s1">&#39;yes&#39;</span><span class="p">]</span>
@@ -11902,7 +11902,7 @@ div#notebook {
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total number of students: 395
-Number of features: 31
+Number of features: 30
 Number of students who passed: 265
 Number of students who failed: 130
 Graduation rate of the class: 67.09%
@@ -11928,7 +11928,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -12010,7 +12010,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -12081,7 +12081,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -12099,7 +12099,9 @@ Feature values:
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">y_all</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">y_all</span><span class="p">[</span><span class="n">num_test</span><span class="p">:]</span>
 
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">num_test</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">num_train</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="n">num_test</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">num_train</span><span class="p">,</span>
+                                                   <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 
 <span class="c1"># Show the results of the split</span>
 <span class="k">print</span> <span class="s2">&quot;Training set has {} samples.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -12240,7 +12242,7 @@ KNN is a very intuitive method that classifies unlabeled examples based on their
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -12313,7 +12315,7 @@ KNN is a very intuitive method that classifies unlabeled examples based on their
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import the three supervised learning models from sklearn</span>
@@ -12323,32 +12325,14 @@ KNN is a very intuitive method that classifies unlabeled examples based on their
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
 
 <span class="c1"># Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">clf_B</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
-
-<span class="c1"># Set up the training set sizes</span>
-<span class="n">X_train_100</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-<span class="n">y_train_100</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-    
-<span class="n">X_train_200</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
-<span class="n">y_train_200</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
-
-<span class="n">X_train_300</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">]</span>
-<span class="n">y_train_300</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">]</span>
-
-<span class="c1"># Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">clf</span> <span class="ow">in</span> <span class="p">[</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">clf_B</span><span class="p">,</span> <span class="n">clf_C</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">n_train</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]:</span>
+        <span class="n">train_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">n_train</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">n_train</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12362,63 +12346,83 @@ KNN is a very intuitive method that classifies unlabeled examples based on their
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a SVC using a training set size of 100. . .
-Trained model in 0.0028 seconds
-Made predictions in 0.0017 seconds.
-F1 score for training set: 0.8531.
-Made predictions in 0.0013 seconds.
-F1 score for test set: 0.8701.
+Trained model in 0.0027 seconds
+Made predictions in 0.0014 seconds.
+F1 score for training set: 0.8889.
+Made predictions in 0.0015 seconds.
+F1 score for test set: 0.8077.
+
+
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0060 seconds
-Made predictions in 0.0045 seconds.
-F1 score for training set: 0.8497.
-Made predictions in 0.0016 seconds.
-F1 score for test set: 0.8627.
+Trained model in 0.0051 seconds
+Made predictions in 0.0041 seconds.
+F1 score for training set: 0.8669.
+Made predictions in 0.0018 seconds.
+F1 score for test set: 0.8205.
+
+
 Training a SVC using a training set size of 300. . .
-Trained model in 0.0094 seconds
-Made predictions in 0.0066 seconds.
+Trained model in 0.0095 seconds
+Made predictions in 0.0073 seconds.
 F1 score for training set: 0.8565.
-Made predictions in 0.0035 seconds.
-F1 score for test set: 0.8816.
+Made predictions in 0.0022 seconds.
+F1 score for test set: 0.8205.
+
+
 
 
 Training a GaussianNB using a training set size of 100. . .
-Trained model in 0.0011 seconds
-Made predictions in 0.0004 seconds.
-F1 score for training set: 0.5122.
+Trained model in 0.0007 seconds
 Made predictions in 0.0003 seconds.
-F1 score for test set: 0.4792.
+F1 score for training set: 0.5631.
+Made predictions in 0.0003 seconds.
+F1 score for test set: 0.3956.
+
+
 Training a GaussianNB using a training set size of 200. . .
 Trained model in 0.0008 seconds
-Made predictions in 0.0004 seconds.
-F1 score for training set: 0.7881.
 Made predictions in 0.0003 seconds.
-F1 score for test set: 0.7972.
+F1 score for training set: 0.7942.
+Made predictions in 0.0003 seconds.
+F1 score for test set: 0.6875.
+
+
 Training a GaussianNB using a training set size of 300. . .
 Trained model in 0.0009 seconds
 Made predictions in 0.0004 seconds.
-F1 score for training set: 0.7797.
+F1 score for training set: 0.7677.
 Made predictions in 0.0003 seconds.
-F1 score for test set: 0.7407.
+F1 score for test set: 0.7302.
+
+
 
 
 Training a KNeighborsClassifier using a training set size of 100. . .
-Trained model in 0.0007 seconds
-Made predictions in 0.0013 seconds.
-F1 score for training set: 0.8148.
+Trained model in 0.0005 seconds
 Made predictions in 0.0012 seconds.
-F1 score for test set: 0.7536.
+F1 score for training set: 0.8750.
+Made predictions in 0.0012 seconds.
+F1 score for test set: 0.7755.
+
+
 Training a KNeighborsClassifier using a training set size of 200. . .
 Trained model in 0.0006 seconds
-Made predictions in 0.0030 seconds.
-F1 score for training set: 0.8298.
+Made predictions in 0.0032 seconds.
+F1 score for training set: 0.8534.
 Made predictions in 0.0017 seconds.
-F1 score for test set: 0.8056.
+F1 score for test set: 0.8163.
+
+
 Training a KNeighborsClassifier using a training set size of 300. . .
 Trained model in 0.0008 seconds
-Made predictions in 0.0066 seconds.
-F1 score for training set: 0.8376.
-Made predictions in 0.0023 seconds.
-F1 score for test set: 0.8028.
+Made predictions in 0.0063 seconds.
+F1 score for training set: 0.8610.
+Made predictions in 0.0024 seconds.
+F1 score for test set: 0.8143.
+
+
+
+
 </pre>
 </div>
 </div>
@@ -12442,8 +12446,7 @@ F1 score for test set: 0.8028.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Classifer 1 - SVM</strong></p>
-<table>
+<h6 id="-Classifer-1---SVM"><strong> Classifer 1 - SVM</strong><a class="anchor-link" href="#-Classifer-1---SVM">&#182;</a></h6><table>
 <thead><tr>
 <th style="text-align:center">Training Set Size</th>
 <th style="text-align:center">Training Time</th>
@@ -12455,24 +12458,24 @@ F1 score for test set: 0.8028.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0025</td>
-<td style="text-align:center">0.0016</td>
-<td style="text-align:center">0.8933</td>
-<td style="text-align:center">0.8442</td>
+<td style="text-align:center">0.0027</td>
+<td style="text-align:center">0.0015</td>
+<td style="text-align:center">0.8889</td>
+<td style="text-align:center">0.8077</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0058</td>
-<td style="text-align:center">0.0021</td>
-<td style="text-align:center">0.8956</td>
-<td style="text-align:center">0.8462</td>
+<td style="text-align:center">0.0051</td>
+<td style="text-align:center">0.0018</td>
+<td style="text-align:center">0.8669</td>
+<td style="text-align:center">0.8205</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0100</td>
-<td style="text-align:center">0.0024</td>
-<td style="text-align:center">0.8571</td>
-<td style="text-align:center">0.8462</td>
+<td style="text-align:center">0.0095</td>
+<td style="text-align:center">0.0022</td>
+<td style="text-align:center">0.8565</td>
+<td style="text-align:center">0.8205</td>
 </tr>
 </tbody>
 </table>
@@ -12489,24 +12492,24 @@ F1 score for test set: 0.8028.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0012</td>
+<td style="text-align:center">0.0007</td>
 <td style="text-align:center">0.0003</td>
-<td style="text-align:center">0.8189</td>
-<td style="text-align:center">0.7481</td>
+<td style="text-align:center">0.5631</td>
+<td style="text-align:center">0.3956</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0009</td>
+<td style="text-align:center">0.0008</td>
 <td style="text-align:center">0.0003</td>
-<td style="text-align:center">0.8175</td>
-<td style="text-align:center">0.8175</td>
+<td style="text-align:center">0.7942</td>
+<td style="text-align:center">0.6875</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0011</td>
-<td style="text-align:center">0.0004</td>
-<td style="text-align:center">0.7932</td>
-<td style="text-align:center">0.8088</td>
+<td style="text-align:center">0.0009</td>
+<td style="text-align:center">0.0003</td>
+<td style="text-align:center">0.7677</td>
+<td style="text-align:center">0.7302</td>
 </tr>
 </tbody>
 </table>
@@ -12523,24 +12526,24 @@ F1 score for test set: 0.8028.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0007</td>
-<td style="text-align:center">0.0017</td>
-<td style="text-align:center">00.8369</td>
-<td style="text-align:center">0.7971</td>
+<td style="text-align:center">0.0005</td>
+<td style="text-align:center">0.0012</td>
+<td style="text-align:center">0.8750</td>
+<td style="text-align:center">0.7755</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0013</td>
-<td style="text-align:center">0.0022</td>
-<td style="text-align:center">0.8522</td>
-<td style="text-align:center">0.7917</td>
+<td style="text-align:center">0.0006</td>
+<td style="text-align:center">0.0017</td>
+<td style="text-align:center">0.8534</td>
+<td style="text-align:center">0.8163</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0016</td>
-<td style="text-align:center">0.0028</td>
-<td style="text-align:center">0.8512</td>
-<td style="text-align:center">0.8392</td>
+<td style="text-align:center">0.0008</td>
+<td style="text-align:center">0.0024</td>
+<td style="text-align:center">0.8610</td>
+<td style="text-align:center">0.8143</td>
 </tr>
 </tbody>
 </table>
@@ -12574,7 +12577,9 @@ F1 score for test set: 0.8028.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-Based on the results from the above table, I think Support Vector Machine is the suitable model for this kind of problem. However the model takes more time in training the data, but it should be ok because model does very well in terms of predicting if a student needs any intervention, thus increase the passing rate for the school.</p>
+Based on the results from the above table, I think Support Vector Machine is the suitable model for this kind of problem. However the model takes more time in training the data, this could be a bottleneck if we happen to model huge dataset, but in the case of student intervention it should be ok because of small dataset and also the model does very well in terms of predicting if a student needs any intervention, thus increase the passing rate for the school.
+Another advantage of SVM is kernel method, basically the kernel function which does an implicit mapping of
+the non linearly seperable input space into a linear separable feature space, where linear classifiers are again applicable.</p>
 
 </div>
 </div>
@@ -12627,7 +12632,7 @@ Based on the results from the above table, I think Support Vector Machine is the
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -12637,10 +12642,10 @@ Based on the results from the above table, I think Support Vector Machine is the
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
 
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">),</span> <span class="s1">&#39;C&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]}</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="s1">&#39;poly&#39;</span><span class="p">),</span> <span class="s1">&#39;C&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span> <span class="p">)</span>
@@ -12669,10 +12674,10 @@ Based on the results from the above table, I think Support Vector Machine is the
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0080 seconds.
-Tuned model has a training F1 score of 1.0000.
-Made predictions in 0.0026 seconds.
-Tuned model has a testing F1 score of 0.8485.
+<pre>Made predictions in 0.0070 seconds.
+Tuned model has a training F1 score of 0.8615.
+Made predictions in 0.0024 seconds.
+Tuned model has a testing F1 score of 0.8079.
 </pre>
 </div>
 </div>
@@ -12696,7 +12701,7 @@ Tuned model has a testing F1 score of 0.8485.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> The final score for training is 1.0 and testing is 0.8485, which is slighly more than the untuned model. However this slight improvement is considerable because once the model reaches certain percentage, even if we feed more data the model, it does not make a huge impact on  its prediction. So I am happy with small increment in the prediction.</p>
+<p><strong>Answer: </strong> The final score for training is 1.0 and testing is 0.8079, which is slighly more than the untuned model. However this slight improvement is considerable because once the model reaches certain percentage, even if we feed more data the model, it does not make a huge impact on  its prediction. So I am happy with small increment in the prediction.</p>
 
 </div>
 </div>
