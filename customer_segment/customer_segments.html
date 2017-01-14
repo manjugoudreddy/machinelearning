@@ -19101,29 +19101,14 @@ Data points considered outliers for the feature &#39;Delicatessen&#39;:
 <p><strong>Answer:</strong> Yes, indeed. There are outliers in more than one feature.</p>
 <p>Yes, we need to remove all the outliers from the dataset, otherwise it will skew the results thus resulting incorrect predictions. In case of 'Fresh' products, the Q1 is 8.04805870221 and Q3 is 9.73706394795 and IQR is 1.689004298. Next we find any data point outside the range of 1.5 * IQR will be treated as outlier. As result, those data points will be removed from the input data. The index of all the data points which are treated as outliers are printed in the above exercise.</p>
 <p>All the data points added to outlier is removed in order derive good data for further analysis. The list of indexes for all the features indicated as outlier is printed in the above exercise.</p>
-<p>Following are the data points considered as outliers with respect to Fresh product:</p>
-
-<pre><code>66 81, 95, 96, 128, 171, 193, 218, 304, 305, 338, 353, 355, 355, 357 and 412
-</code></pre>
-<p>Following are the data points considered as outliers with respect to Milk product:</p>
-
-<pre><code>86, 98, 154, 356
-</code></pre>
-<p>Following are the data points considered as outliers with respect to Grocery product:</p>
-
-<pre><code>75, 154
-</code></pre>
-<p>Following are the data points considered as outliers with respect to Frozen product</p>
-
-<pre><code>38, 57, 65, 145, 175, 264, 325, 420, 429, 439
-</code></pre>
-<p>Following are the data points considered as outliers with respect to Detergents_Paper product</p>
-
-<pre><code>75, 161
-</code></pre>
-<p>Following are the data points considered as outliers with respect to Delicatessen product</p>
-
-<pre><code>66, 109, 128, 137, 142, 154, 183, 184, 187, 203, 233, 285, 289, 343</code></pre>
+<p>Following are the data point which are considered as outliers and common across more than 1 feature.</p>
+<ol>
+<li>65 common between Fresh and Frozen feature.</li>
+<li>66 common between Fresh and Delicatessen feature.</li>
+<li>75 common between Grocery and Detergents Paper feature</li>
+<li>128 common between Fresh and Delicatessen feature.</li>
+<li>154 common between Milk, Delicatessen and Grocery feature</li>
+</ol>
 
 </div>
 </div>
@@ -19592,13 +19577,13 @@ CUYAAMDwBCMAAGB4ghEAADA8wQgAABje3wAdvHNCtD6FkwAAAABJRU5ErkJggg==
 </ol>
 <p>Now lets look at the first four dimensions best represents in terms of customer spending:</p>
 <ol>
-<li><p>In the first dimension, we can see that orders placed for Detergents &amp; Papers product is in turn co-related to milk and grocery products. We can say that these three features are correlated. As a result increase in one of the product in turn results in increase in other 2 products. Also we can see variance is more in Detergents_Papers product when compared to other two products (milk and grocery).</p>
+<li><p>In the first dimension, we can see that orders placed for Detergents &amp; Papers product is in turn co-related to milk and grocery products. We can say that these three features are correlated. As a result increase in one of the product in turn results in increase in other 2 products. Also we can see variance is more in Detergents_Papers product when compared to other two products (milk and grocery). Based on the correlation between the customer spending that implies customer is spending primarily on retail goods.</p>
 </li>
-<li><p>In the second dimension, we see all the features have negative weights. In this case Fresh, Frozen and Delicatessen products are strongly corelated. All these features are inter-related causing spending in one of the product influencing customers to buy other 2 products. According to bar plot, we can see high variation in the Fresh product compared to other products in the dimension.</p>
+<li><p>In the second dimension, we see all the features have negative weights. In this case Fresh, Frozen and Delicatessen products are strongly corelated. All these features are inter-related causing spending in one of the product influencing customers to buy other 2 products. According to bar plot, we can see high variation in the Fresh product compared to other products in the dimension. Based on the correlation between the Fresh, Frozen and Detergent &amp; Papers, it implies that the customer is spending majorly on products required for hotel/restaurant.</p>
 </li>
-<li><p>In the third dimension, we see Delicatessen is strongly corelated to Frozen products. At the same time we see that Delicatessen has postive weight whereas Fresh product has negative weight, which means they are inversely correlated.</p>
+<li><p>In the third dimension, we see Delicatessen is strongly corelated to Frozen products. At the same time we see that Delicatessen has postive weight whereas Fresh product has negative weight, which means they are inversely correlated. Based on the correlation between Delicatessen and Frozen feature, the customer is spending more on food often sold in cafe/restaurant.</p>
 </li>
-<li><p>In the fourth dimension, we see explained variance is very small. However we see correlation between Frozen and Detergents and Papers products. Again from the bar graph we see the Frozen product has got high variation in the data set compared with Detergents and Papers.</p>
+<li><p>In the fourth dimension, we see explained variance is very small. However we see correlation between Frozen and Detergents and Papers products. Again from the bar graph we see the Frozen product has got high variation in the data set compared with Detergents and Papers. Based on the correlation between Frozen and Detergents and Papers features, it implies customer is spending on hotel/restaurant goods.</p>
 </li>
 </ol>
 
@@ -22385,15 +22370,16 @@ AOAYBj0AAAAAcAyDHgAAAAA45i9HtBSEqSADwwAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> As per the above exercise, we got 2 clusters. The first cluster represents customers who buy more of fresh products compared to other products in the data set, whereas the second cluster represents customers who buy more of grocery products. So in nutshell I think cluster 1 represents restaurants/cafe market whereas the cluster 2 represents retail market.</p>
-<p>When I compare against the sample customers picked earlier in exercise 1, I think customer 0 and customer 2 spends more on grocery products, which is around the mean of the feature set of segment 1. However customer 1 spends more on fresh products, so I think he must be running cafe/restaurant.</p>
+<p><strong>Answer:</strong> 
+In the above exercise we have segmented customers into 2 segments. In the first segment customers are primarily categorised as Cafe/Hotels because of orders placed on products such as Fresh/Milk and Frozen, whereas second segment customers are categorised as giant retailer because of placed on grocery.</p>
+<p>When we compare this information against the sample data, we notice that segment 0 mean/center for Fresh, Milk and Frozen products are 8812.0, 2052, 2058 respectively are inline with spending on these products by customers 1 and 2, which implies that they fall in segment 0 and these customers could be cafe/restaurant. Where as customer 0 spends more on grocery products which is 12974, which aligns with the mean/center for grocery in segment 1, which implies that the customer 2 could be retail giant.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the predictions</span>
@@ -22411,9 +22397,9 @@ AOAYBj0AAAAAcAyDHgAAAAA45i9HtBSEqSADwwAAAABJRU5ErkJggg==
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Sample point 0 predicted to be in Cluster 1
-Sample point 1 predicted to be in Cluster 1
-Sample point 2 predicted to be in Cluster 1
+<pre>Sample point 0 predicted to be in Cluster 0
+Sample point 1 predicted to be in Cluster 0
+Sample point 2 predicted to be in Cluster 0
 </pre>
 </div>
 </div>
@@ -22510,7 +22496,7 @@ Sample point 2 predicted to be in Cluster 1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the clustering results based on &#39;Channel&#39; data</span>
