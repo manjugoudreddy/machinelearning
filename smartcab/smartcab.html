@@ -11855,23 +11855,12 @@ div#notebook {
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong>
-When I run the agent.py, simulation starts off and the agent undergoes training and continues to learn various actions to be taken under defined set of circumstances. This is achieved by running numerous sets of trials. Every mistake done during trails is penalised by rewarding negative score and at the same time successful learn is rewarded by a positive score.</p>
-<ol>
-<li>Yes, the Smartcab does move during the simulation. </li>
-<li>During the trial, the driving agent is learning various scenarios. For every mistake, the agent is rewarded a negative score and for every successful learn, the agent is rewarded a positive score. For instance, agent properly idled at a red light is rewarded 2.96, whereas Agent idled at a green light with no oncoming traffic is rewarded -4.30.</li>
-<li>Whenever light changes, for instance light changes from green to red there is positive reward provided the cab does the right thing. However when light changes from red to green, the cabs are negatively rewarded because of failure to make move.</li>
-</ol>
+</div>Answer:
+When I run the agent.py, simulation starts off and the agent undergoes training and continues to learn various actions to be taken under defined set of circumstances. This is achieved by running numerous sets of trials. Every mistake done during trails is penalised by rewarding negative score and at the same time successful learn is rewarded by a positive score.
 
-</div>
-</div>
-</div>
+1. Yes, the Smartcab does move during the simulation. 
+2. During the trial, the driving agent is learning various scenarios. For every mistake, the agent is rewarded a negative score and for every successful learn, the agent is rewarded a positive score. For instance, agent properly idled at a red light is rewarded 2.96, whereas Agent idled at a green light with no oncoming traffic is rewarded -4.30.
+3. Whenever light changes, for instance light changes from green to red there is positive reward provided the cab does the right thing. However when light changes from red to green, the cabs are negatively rewarded because of failure to make move. Whenever the traffic light go green, there is oncoming traffic and whenever the agent takes a left turn, the agent is negatively rewarded.
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13096,6 +13085,15 @@ However the input feature 'deadline' is not relevant, because it is meant to pro
 <p><strong>Answer:</strong>
 In question4, I picked two features (waypoint and inputs sensor) for making a safe and efficient journey for the learning agent. Based on this, I picked following states:
 (Waypoint, light, Oncoming, Left)</p>
+<p>We might notice that the 'Right' sensor is not included in the state space and the rationale behind dropping that sensor  is because of driving regulations enforced in US. As we know that in US, its free right turn, I mean the agent should be good go as long as traffic light is green without bothering about the oncoming traffic.</p>
+<p>In order to find out the total number of states, we need to find all possible outcomes of each state. Lets find for state:</p>
+<ol>
+<li>Waypoint could be Left, Right, Forward - (3)</li>
+<li>Light could be Green or Red - (2)</li>
+<li>Oncoming could be None, Left,Right, Forward - (4)</li>
+<li>Left could None, Left, Right, Forward - (4)</li>
+</ol>
+<p>In total we could have 2 ^13 = 8192 states.</p>
 
 </div>
 </div>
@@ -14417,7 +14415,17 @@ kibIJEuSJEmSJsgkS5IkSZIm6H8O24iD7Yw0mAAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-A. I think are few similarities between the basic and default Q-learning simulation, such as</p>
+By comparing the two graphs (one with basic driving agent and inital version of Q-Learn), following observations can be made:</p>
+<ol>
+<li><p>The agent starts to learn and pick the correct action based on the maximum Q-value estimated so far. As a result of this, the agent starts to learn and make less mistakes. This is evident in the above graph, the number of minor/major violations drops down and the postive trend in the rewards. In case of basic use case, the agent  picks up action from random set of states and continues to make repeated mistakes. This is evident from the graph, whereby the number of major/minor violations never drops and we can see the rewards follow negative trend.</p>
+</li>
+<li><p>A continous learning factor alpha is used while calculating the rewards for state-action pair, however in case of basic version there does not exist learning factor.</p>
+</li>
+<li><p>Since the agent keeps learning, there is improvement in the reliability, because it does take correct actions every state, whereas in case of basic agent, there is no improvfement in terms of reliability because of constant mistakes done by the agent.</p>
+</li>
+</ol>
+<p>Apart from the above observations, following are the additional items when compared between initial version of Q-learning and the basic driving agent.</p>
+<p>A. I think are few similarities between the basic and default Q-learning simulation, such as</p>
 
 <pre><code>    1. Agent does make mistakes even though agent is learning.
     2. Agent does not pick optimized action based on the state, so may not reach the destination on time.
@@ -16258,19 +16266,19 @@ Whereas alpha is learning factor, which is used in learn method to update the Q 
 <li>When the traffic lights turn red, the smartcab should stop or none.</li>
 <li>When the next action is turn right and the traffic light is red for moving forward, the smartcab should ignore the oncoming traffic and simply drive.</li>
 </ol>
-<p>I went through the sim_improved-learning.txt and noticed for the first usecase that the policy is what I expected.
-Below is one of the state where traffic light is red and we can see that action 'None' is rewarded the best optimal value.
+<p>I went through the sim_improved-learning.txt and noticed for the first usecase, whereby the traffic light is red, oncoming traffic is turning left and the agent intended to take a right turn, the sub optimal policy is to take no action. Below is one of the state where traffic light is red and we can see that action 'None' is rewarded the best sub optimal value.
 ('right', 'red', 'left', 'right')
  -- forward : -0.39
  -- right : 0.00
  -- None : 0.20
  -- left : -0.09</p>
-<p>In the second usecase, I noticed that the policy is as expected. Brelow is one of the state where traffic light is red and I think we might have encountered this state multiple times but with different actions. As a result of this, we can see (below an instance) that 'right' and 'None' has got positive rewards, whereas any other actions has got negative rewards. I hope that covers two possible use cases which has optimal policy for both the cases.</p>
+<p>In the second usecase, I noticed that the policy is translated as an optimal policy. Below is one of the state where traffic light is red and I think we might have encountered this state multiple times but with different actions. As a result of this, we can see (below an instance) that 'right' and 'None' has got positive rewards, whereas any other actions has got negative rewards.</p>
 <p>('left', 'red', 'forward', None)
  -- forward : -0.18
  -- right : 0.43
  -- None : 0.09
- -- left : -0.27</p>
+ -- left : -0.27
+I hope that I covered two possible use cases, one of which is sub-optimal and the second being optimal policy.</p>
 
 </div>
 </div>
