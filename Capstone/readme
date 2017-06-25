@@ -1,1 +1,14 @@
 This folder contains docs and source code for captstone project.
+
+I. Following libraries are used for AirBnb Project:
+
+1. Pandas
+2. Numpy
+3. Various Sklearn modules for supervised machine learning models
+
+II. Dataset
+
+The dataset is used from Kaggle and here is the link:
+
+https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings/data
+
