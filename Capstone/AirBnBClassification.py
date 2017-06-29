@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import xgboost as xgb
+from pandas import DataFrame, Series
 
 from sklearn import grid_search
 
@@ -77,9 +78,16 @@ def preprocessing(df_train):
     # Fill first_affiliate_tracked column
     print("Filling first_affiliate_tracked column...")
     df_train['first_affiliate_tracked'].fillna(-1, inplace=True)
-    print ("Number of features and rows is ", df_train.shape)
+
     return df_train
 
+def printstatiscs(df_train):
+    # Print some of the statistics of the dataset
+    print ("Number of features and rows is ", df_train.shape)
+    print("Mean age group is ", df_train['age'].mean())
+    print("Describing data_account_created", df_train['date_account_created'].describe())
+    print("Describing country_destination", df_train['country_destination'].describe())
+    print("Describing gender", df_train['gender'].describe())
 
 ####################################################
 # Data Normalization                               #
@@ -265,5 +273,6 @@ def trainandtest(df_train):
 if __name__ == '__main__':
     df_train = readinputfile()
     df_train = preprocessing(df_train)
+    printstatiscs(df_train)
     df_train = normalisedata(df_train)
     df_train = trainandtest(df_train)
